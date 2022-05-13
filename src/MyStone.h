@@ -37,14 +37,18 @@ struct datasRead {
 
 class MyStone {
     private:
-       MySerial *mySerial;
-
+        MySerial *mySerial;
+        //Transfert de ces deux méthodes en privées depuis la version 1.2
+        int writeIt(std::string cmdFormat2);
+        int readIt(char *data, int len);
     public:
         MyStone(int speed, uint32_t config, int rxd, int txd);
         ~MyStone() { };
-
-        datasRead getValidsDatasIfExists(); 
-        int writeIt(std::string cmdFormat2);
-        int readIt(char *data, int len);
-};
+        datasRead getValidsDatasIfExists();
+       
+        //Nouvelles méthodes ajoutées dans la version 1.2
+        void changePage(const char *pageName = "");
+        void setLabel(const char *labelName, const char *value);
+        void getVersion();
+   };
 #endif
